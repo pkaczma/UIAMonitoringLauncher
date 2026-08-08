@@ -1,0 +1,60 @@
+<UserControl x:Class="MonitoringLauncherWPF.Views.AutomationsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Cursor="Arrow">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="0,20,15,15" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/> </Grid.ColumnDefinitions>
+            
+            <Border Background="{StaticResource BgInput}" BorderBrush="{StaticResource BorderSubtle}" BorderThickness="1" CornerRadius="6" Padding="12,10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="🔍" Foreground="{StaticResource TextSecondary}" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                    
+                    <TextBox x:Name="SearchBox" Grid.Column="1" Background="Transparent" Foreground="{StaticResource TextPrimary}" BorderThickness="0" FontSize="14" VerticalAlignment="Center" Text="Search automations..." TextChanged="SearchBox_TextChanged">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Foreground" Value="{StaticResource TextSecondary}"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsFocused" Value="True">
+                                        <Setter Property="Text" Value=""/>
+                                        <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </Grid>
+            </Border>
+
+            <Button Grid.Column="1" Style="{StaticResource GhostButton}" Content="Unselect All" Margin="15,0,0,0" Click="UnselectAll_Click"/>
+            <Button Grid.Column="2" Style="{StaticResource ModernButton}" Content="🔄 Refresh" Margin="10,0,0,0" Click="Refresh_Click"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel x:Name="AutomationsList" HorizontalAlignment="Stretch" Margin="0,0,15,0">
+                    </StackPanel>
+            </ScrollViewer>
+
+            <TextBlock x:Name="NoResultsText" 
+                       Text="No automations found matching your search." 
+                       Foreground="{StaticResource TextSecondary}" 
+                       FontSize="15" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</UserControl>

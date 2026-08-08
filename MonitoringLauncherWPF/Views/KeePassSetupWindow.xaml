@@ -1,0 +1,114 @@
+<Window x:Class="MonitoringLauncherWPF.Views.KeePassSetupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="KeePass Setup" Height="Auto" Width="420"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        SizeToContent="Height">
+
+    <Border Background="{StaticResource BgDark}" 
+            CornerRadius="10" 
+            BorderBrush="{StaticResource BorderSubtle}" 
+            BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Pasek tytułowy -->
+            <Border Grid.Row="0" Background="Transparent" MouseDown="HeaderBorder_MouseDown" Padding="16,12">
+                <Grid>
+                    <TextBlock Text="KeePass Setup" 
+                               Foreground="{StaticResource TextPrimary}" 
+                               FontWeight="SemiBold" 
+                               FontSize="16" 
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- Główna zawartość -->
+            <StackPanel Grid.Row="1" Margin="24,10,24,24">
+                
+                <TextBlock Text="Database File (.kdbx)" 
+                           Foreground="{StaticResource TextSecondary}" 
+                           FontSize="13" 
+                           Margin="0,0,0,8"/>
+                <Grid Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBox Grid.Column="0" 
+                             Style="{StaticResource ModernTextBox}" 
+                             Margin="0,0,8,0" 
+                             IsReadOnly="True" 
+                             x:Name="KdbxFilePath"
+                             Text="Wybierz plik bazy danych..."
+                             Padding="12,0"
+                             VerticalContentAlignment="Center"
+                             Height="36"/>
+                    
+                    <Button Grid.Column="1" 
+                            Content="Browse" 
+                            Style="{StaticResource ModernButton}" 
+                            Padding="16,0"
+                            Height="36"
+                            Click="BrowseButton_Click"/>
+                </Grid>
+
+                <TextBlock Text="Master Password" 
+                           Foreground="{StaticResource TextSecondary}" 
+                           FontSize="13" 
+                           Margin="0,0,0,8"/>
+                
+                <!-- Margines dolny zmieniony na stałe 8 -->
+                <Border Background="{StaticResource BgInput}" 
+                        BorderBrush="{StaticResource BorderSubtle}" 
+                        BorderThickness="1" 
+                        CornerRadius="6" 
+                        Padding="12,0" 
+                        Height="36"
+                        Margin="0,0,0,8">
+                    <PasswordBox x:Name="MasterPasswordBox"
+                                 Background="Transparent" 
+                                 BorderThickness="0" 
+                                 Foreground="{StaticResource TextPrimary}" 
+                                 FontSize="14" 
+                                 VerticalContentAlignment="Center"
+                                 CaretBrush="{StaticResource TextPrimary}"/>
+                </Border>
+
+                <!-- Brak marginesu dolnego, opiera się na marginesach innych elementów -->
+                <TextBlock x:Name="WarningTextBlock" 
+                           Foreground="{StaticResource DangerColor}" 
+                           FontSize="13"
+                           TextWrapping="Wrap"
+                           Visibility="Collapsed"
+                           Margin="0,0,0,0"/>
+
+                <!-- Margines górny 16, co łącznie z 8 pod hasłem daje idealne 24 gdy błędu brak -->
+                <Grid Margin="0,16,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Grid.Column="0" 
+                            Content="Cancel" 
+                            Style="{StaticResource GhostButton}" 
+                            Height="36"
+                            Click="CancelButton_Click"/>
+                    
+                    <Button Grid.Column="2" 
+                            Content="Login" 
+                            Style="{StaticResource PrimaryButton}"
+                            Height="36"
+                            Click="LoginButton_Click"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

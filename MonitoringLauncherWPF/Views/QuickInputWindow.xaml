@@ -1,0 +1,50 @@
+<Window x:Class="MonitoringLauncherWPF.Views.QuickInputWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Wprowadzanie wartości" Width="450"
+        SizeToContent="Height" MinHeight="150"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterOwner" Topmost="True" ShowInTaskbar="False"
+        KeyDown="Window_KeyDown">
+
+    <Border Background="{StaticResource BgCard}" 
+            CornerRadius="8" 
+            BorderBrush="{StaticResource AccentPrimary}" 
+            BorderThickness="2"
+            Margin="10">
+        <Border.Effect>
+            <DropShadowEffect Color="Black" BlurRadius="15" Opacity="0.4" ShadowDepth="4"/>
+        </Border.Effect>
+        <Grid Margin="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="PromptTextBlock" Grid.Row="0" Text="Wprowadź tekst:" 
+                       Foreground="{StaticResource TextPrimary}" FontWeight="SemiBold" FontSize="13" 
+                       Margin="0,0,0,12" TextWrapping="Wrap"/>
+
+            <Grid Grid.Row="1" Margin="0,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" x:Name="KeePassColumn"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBox x:Name="InputTextBox" Grid.Column="0" Style="{StaticResource ModernTextBox}" 
+                         Height="Auto" MinHeight="36" Padding="12,8" TextWrapping="Wrap" 
+                         VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto"/>
+                
+                <Button x:Name="KeePassBtn" Grid.Column="1" Style="{StaticResource ModernButton}" 
+                        Content="🔑 KeePass" Height="36" Margin="8,0,0,0" Padding="12,0" VerticalAlignment="Top"
+                        Click="KeePassBtn_Click"/>
+            </Grid>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Style="{StaticResource GhostButton}" Content="Anuluj (Esc)" Height="30" Padding="12,0" Margin="0,0,8,0" Click="Cancel_Click"/>
+                <Button Style="{StaticResource PrimaryButton}" Content="Zatwierdź (Enter)" Height="30" Padding="12,0" Click="Ok_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
